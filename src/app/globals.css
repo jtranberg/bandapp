@@ -1,10 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 :root {
 	line-height: 1.5;
-	font-weight: 400;
+	font-weight: 500;
 	font-synthesis: none;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
@@ -13,10 +9,118 @@
 	font-optical-sizing: auto;
 	font-style: normal;
 	font-variation-settings: 'slnt' 0;
-}
-
-@layer base {
-	body {
-		@apply bg-zinc-950 text-neutral-200;
+  }
+  
+  body {
+	background-color: #1c1c1c; /* Equivalent to bg-zinc-950 */
+	color: #1d4fce; /* Equivalent to text-neutral-200 */
+  }
+  
+  .chat-messages {
+	
+	display: block;
+	margin: auto;
+	max-width: 60vw;
+	height: 300px;
+	overflow-y: scroll;
+	padding: 10px;
+	background-color: #f1f1f1;
+	border: 1px solid #ccc;
+	margin-bottom: 10px;
+  }
+  
+  .chat-messages div {
+	max-width: 55vw;
+	margin: auto;
+	width: 80vw;
+	height: auto;
+	margin-bottom: 3px;
+	padding: 3px;
+	background-color: #fff;
+	border-radius: 5px;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  input {
+	display: flex;
+	margin: auto;
+	width: 80vw;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	max-width: 60vw;
+  }
+  
+  button {
+	display: flex;
+	margin: auto;
+	padding: 10px 20px;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+  }
+  .header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px;
+	background-color: #1c1c1c;
+	color: #e5e5e5;
+  }
+  
+  .logo h1 {
+	font-size: 24px;
+	font-weight: bold;
+  }
+  
+  .nav ul {
+	list-style: none;
+	display: flex;
+	gap: 20px;
+  }
+  
+  .nav ul li {
+	cursor: pointer;
+	padding: 10px 20px;
+	border-radius: 5px;
+	background-color: #007bff;
+	color: white;
+  }
+  
+  .nav ul li:hover {
+	background-color: #0056b3;
+  }
+  
+  @media (max-width: 768px) {
+	.nav ul {
+	  flex-direction: column;
+	  gap: 10px;
 	}
-}
+  }
+  .music-page {
+	text-align: center;
+	padding: 40px;
+  }
+  
+  .music-page h1 {
+	font-size: 2.5rem;
+	margin-bottom: 20px;
+  }
+  
+  .music-page ul {
+	list-style-type: none;
+	padding: 0;
+  }
+  
+  .music-page li a {
+	font-size: 1.25rem;
+	color: #007bff;
+	text-decoration: none;
+  }
+  
+  .music-page li a:hover {
+	text-decoration: underline;
+  }
+  

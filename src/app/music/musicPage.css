@@ -1,0 +1,37 @@
+.music-page {
+    text-align: center;
+    padding: 40px;
+  }
+  
+  .music-page h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));  /* Responsive grid layout */
+    gap: 20px;  /* Space between grid items */
+    padding: 20px;
+  }
+  
+  .grid-item {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .grid-item img {
+    width: 50%;  /* Reduce width to 50% of original */
+    height: auto;  /* Maintain aspect ratio */
+    border-radius: 8px;
+  }
+  
+  .grid-item p {
+    margin-top: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+  

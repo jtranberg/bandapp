@@ -1,10 +1,9 @@
-"use client"; // Ensure it's a client component for useEffect to work
-
 import React, { useState, useEffect } from 'react';
 import { collection, addDoc, onSnapshot, query, orderBy } from 'firebase/firestore';
-import { db } from './firebase'; // Make sure this points to your firebase.ts file
+import { db } from './app/firebase'; // Correct the path based on your directory structure
 
-// Define message structure
+
+// Define the type for a message
 interface Message {
   id: string;
   text: string;
@@ -12,53 +11,39 @@ interface Message {
 }
 
 const ChatComponent: React.FC = () => {
+  // Specify the type of messages as an array of Message objects
   const [messages, setMessages] = useState<Message[]>([]);
   const [message, setMessage] = useState<string>('');
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const q = query(collection(db, 'messages'), orderBy('createdAt', 'asc'));
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const fetchedMessages = snapshot.docs.map((doc) => ({
         id: doc.id,
-        text: doc.data().text as string,
-        createdAt: doc.data().createdAt.toDate() as Date,
+        text: doc.data().text as string, // Type assertion to ensure it's a string
+        createdAt: doc.data().createdAt.toDate() as Date, // Convert Firestore timestamp to Date
       }));
-      setMessages(fetchedMessages);
-      setLoading(false); // Disable loading once messages are fetched
+      setMessages(fetchedMessages); // Set state with fetched messages
     });
 
     return () => unsubscribe();
   }, []);
 
   const sendMessage = async () => {
-    if (message.trim() === '') {
-      alert('Please enter a message');
-      return;
+    if (message) {
+      await addDoc(collection(db, 'messages'), {
+        text: message,
+        createdAt: new Date(),
+      });
+      setMessage(''); // Clear the input after sending the message
     }
-
-    await addDoc(collection(db, 'messages'), {
-      text: message,
-      createdAt: new Date(),
-    });
-
-    setMessage(''); // Clear the input after sending
-  };
-
-  const formatDate = (date: Date) => {
-    return `${date.getHours()}:${date.getMinutes()}`;
   };
 
   return (
-    
-    <div className="chat-container">
-      {loading ? <p>Loading...</p> : null}
+    <div>
       <div className="chat-messages">
         {messages.map((msg) => (
-          <div key={msg.id}>
-            <p>{msg.text}</p>
-            <small>{formatDate(msg.createdAt)}</small>
-          </div>
+          <div key={msg.id}>{msg.text}</div>
         ))}
       </div>
       <input
